@@ -1,0 +1,155 @@
+# JMeter 脚本生成示例
+
+本目录包含 JMeter 脚本生成功能的使用示例。
+
+## 使用方式
+
+### 1. 通过 Curl 命令生成
+
+```bash
+# 简单的 GET 请求
+python main.py --jmeter "curl 'https://api.example.com/users' -H 'Authorization: Bearer token123'"
+
+# POST 请求
+python main.py --jmeter "curl -X POST 'https://api.example.com/login' -H 'Content-Type: application/json' -d '{\"username\":\"test\",\"password\":\"123456\"}'"
+```
+
+### 2. 通过接口文档生成
+
+创建接口文档文件 `api_doc.md`：
+
+```markdown
+# 用户登录接口
+
+**请求地址**: POST /api/login
+
+**请求头**:
+  Content-Type: application/json
+
+**请求体**:
+```json
+{
+  "username": "testuser",
+  "password": "123456"
+}
+```
+
+**响应示例**:
+```json
+{
+  "code": 200,
+  "message": "success",
+  "data": {
+    "userId": "123",
+    "token": "abc123"
+  }
+}
+```
+
+**断言要求**:
+- HTTP 状态码为 200
+- 响应包含 userId 和 token 字段
+- 响应时间小于 5000ms
+```
+
+然后执行：
+```bash
+python main.py --jmeter api_doc.md
+```
+
+### 3. 通过 API 调用
+
+```bash
+# 启动服务
+python server.py
+
+# 生成 JMeter 脚本
+curl -X POST http://localhost:8000/api/jmeter \
+  -H "Content-Type: application/json" \
+  -d '{
+    "input": "curl '\''https://api.example.com/users'\'' -H '\''Authorization: Bearer token123'\''",
+    "input_type": "text"
+  }'
+
+# 查询任务状态
+curl http://localhost:8000/api/tasks/{task_id}
+```
+
+## 生成的脚本特性
+
+1. **完整的 .jmx XML 格式**：可直接在 JMeter 中打开
+2. **自动断言**：
+   - HTTP 状态码断言
+   - 响应数据断言
+   - 响应时间断言
+3. **参数化支持**：自动识别动态参数
+4. **关联处理**：使用 JSON Extractor 处理数据关联
+5. **合理的默认值**：
+   - 线程数：1
+   - 循环次数：1
+   - Ramp-Up Period：1秒
+
+## 实际案例
+
+### 案例1：RESTful API 测试
+
+输入 Curl：
+```bash
+curl -X POST 'https://api.example.com/users' \
+  -H 'Authorization: Bearer your_token' \
+  -H 'Content-Type: application/json' \
+  -d '{"name":"张三","email":"zhangsan@example.com"}'
+```
+
+生成结果：
+- 完整的 HTTP POST 请求
+- Authorization 和 Content-Type 请求头
+- JSON 请求体
+- 状态码断言（200）
+- 响应时间断言（<5000ms）
+
+### 案例2：接口文档生成
+
+输入接口文档，生成：
+- 多步骤测试场景（如：登录 → 获取用户信息 → 更新资料）
+- 关联参数提取（从登录响应提取 token）
+- JSON Path 断言验证业务数据
+- CSV 数据文件支持参数化测试
+
+## 注意事项
+
+1. 生成的 .jmx 文件保存在 `output/` 目录
+2. 使用 JMeter 5.0+ 打开生成的脚本
+3. 建议在非 GUI 模式下运行性能测试：
+   ```bash
+   jmeter -n -t test_script.jmx -l result.jtl -e -o report/
+   ```
+4. 根据实际需求调整线程组和断言配置
+
+## 高级用法
+
+### 并发测试
+
+修改生成的 .jmx 文件中的线程组配置：
+- 线程数：10（模拟10个用户）
+- Ramp-Up Period：5（5秒内启动所有线程）
+- 循环次数：100（每个线程执行100次）
+
+### 参数化测试
+
+1. 创建 CSV 文件 `data.csv`：
+```csv
+username,password
+user1,pass1
+user2,pass2
+user3,pass3
+```
+
+2. 在 JMeter 中添加 CSV Data Set Config，引用变量 `${username}` 和 `${password}`
+
+### 关联处理
+
+如果需要从前一个请求的响应中提取数据用于后续请求，使用：
+- JSON Extractor：对于 JSON 响应
+- Regular Expression Extractor：对于 HTML 或文本响应
+- Boundary Extractor：对于固定格式的响应

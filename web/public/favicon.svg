@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <defs>
+    <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#333"/>
+      <stop offset="100%" stop-color="#111"/>
+    </linearGradient>
+  </defs>
+  <!-- 圆角方形背景 -->
+  <rect x="6" y="6" width="108" height="108" rx="24" ry="24" fill="url(#g1)"/>
+  <!-- 盾牌轮廓 -->
+  <path d="M60 22 L88 36 L88 64 Q88 82 60 98 Q32 82 32 64 L32 36 Z" fill="none" stroke="#fff" stroke-width="4" stroke-linejoin="round"/>
+  <!-- 盾牌内左侧斜线 -->
+  <path d="M32 36 L60 22 L88 36" fill="none" stroke="#fff" stroke-width="4" stroke-linejoin="round"/>
+  <!-- 对勾 -->
+  <polyline points="46,60 56,72 76,48" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

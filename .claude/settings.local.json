@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python:*)",
+      "Bash(curl:*)",
+      "Bash(netstat:*)",
+      "Bash(xargs:*)",
+      "Bash(taskkill:*)",
+      "Bash(./venv/Scripts/python.exe -m pip:*)",
+      "Bash(./venv/Scripts/python.exe:*)",
+      "Bash(git log *)",
+      "Bash(python3 main.py --jmeter \"curl 'https://test.jlc.com/api/integrated/public/getSteelmeshDimensionList?_t=1778060525077' -H 'Accept-Encoding: gzip, deflate, br' -H 'Accept-Language: zh-CN,zh;q=0.9' -H 'User-Agent: Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36 \\(KHTML, like Gecko\\) Chrome/69.0.3497.81 Safari/537.36' -H 'Accept: application/json, text/plain, */*' -H 'Referer: https://test.jlc.com/' -H 'Cookie: JLCGROUP_SESSIONID=1c1d8d52-e806-4a8e-8e88-1acf72d32773; Hm_lvt_2c39bff195277b6ae5c091fa1a0539c9=1778058608; HMACCOUNT=4AD775B7E93C9F79; Hm_lvt_fd32df1c0976b3b5c48e7972938e570a=1778058608; Hm_lpvt_2c39bff195277b6ae5c091fa1a0539c9=1778060158; Hm_lpvt_fd32df1c0976b3b5c48e7972938e570a=1778060158; signature=5999cc1449a94e43907771cfe0b44d96' -H 'Connection: keep-alive' -H 'secretkey: 39306462313662652d323032342d346635302d623538302d333461343961343864393362' --compressed\")",
+      "Bash(./venv/Scripts/pip.exe list *)",
+      "Bash(./venv/Scripts/pip.exe install *)",
+      "Bash(\"E:\\\\code\\\\im_test_tools\\\\yunxin-mcp-server-main\\\\.venv\\\\Scripts\\\\python.exe\" main.py --jmeter \"curl 'https://test.jlc.com/api/integrated/public/getSteelmeshDimensionList?_t=1778060525077' -H 'Accept-Encoding: gzip, deflate, br' -H 'Accept-Language: zh-CN,zh;q=0.9' -H 'User-Agent: Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36 \\(KHTML, like Gecko\\) Chrome/69.0.3497.81 Safari/537.36' -H 'Accept: application/json, text/plain, */*' -H 'Referer: https://test.jlc.com/' -H 'Cookie: JLCGROUP_SESSIONID=1c1d8d52-e806-4a8e-8e88-1acf72d32773; Hm_lvt_2c39bff195277b6ae5c091fa1a0539c9=1778058608; HMACCOUNT=4AD775B7E93C9F79; Hm_lvt_fd32df1c0976b3b5c48e7972938e570a=1778058608; Hm_lpvt_2c39bff195277b6ae5c091fa1a0539c9=1778060158; Hm_lpvt_fd32df1c0976b3b5c48e7972938e570a=1778060158; signature=5999cc1449a94e43907771cfe0b44d96' -H 'Connection: keep-alive' -H 'secretkey: 39306462313662652d323032342d346635302d623538302d333461343961343864393362' --compressed\")",
+      "Bash(npm install *)",
+      "Bash(node --version)",
+      "Bash(venv/Scripts/python:*)",
+      "Bash(venv/Scripts/pip list:*)",
+      "Bash(findstr:*)",
+      "Bash(venv/Scripts/pip install:*)"
+    ]
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "playwright"
+  ]
+}
